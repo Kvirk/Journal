@@ -1,4 +1,5 @@
 const initialState = {
+  type: 'make',
   list: [],
   newJournal: {name: '', entry: '', rating: '0'},
   loading: false,
@@ -21,10 +22,11 @@ const asyncJournalReducer = (state = initialState, action) => {
     }
     case 'ASYNC_ADD_JOURNAL_SUCCESS':{
       return {
+        type: 'nothing',
         list: state.list.concat(action.data),
         loading: false,
         message: undefined,
-        newJournal: {name: ''}
+        newJournal: {name: '', entry: '', rating: '0'}
       };
     }
     case 'ASYNC_DELETE_JOURNAL':{
