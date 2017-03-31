@@ -12,6 +12,8 @@ import App from './App.jsx';
 import reducers from './reducers'
 import thunkMiddleware from 'redux-thunk';
 const store = createStore(reducers, applyMiddleware(thunkMiddleware));
+
+
 render(
   <Provider store={store}>
     <App />

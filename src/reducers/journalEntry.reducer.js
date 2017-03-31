@@ -1,6 +1,6 @@
 const initialState = {
   list: [],
-  newJournal: {name: ''},
+  newJournal: {name: '', entry: ''},
   loading: false,
   message: undefined
 };
@@ -62,6 +62,15 @@ const asyncJournalReducer = (state = initialState, action) => {
         newJournal:{
           ...state.newJournal,
           name: action.name
+        }
+      };
+    }
+    case 'ASYNC_UPDATE_ENTRY':{
+      return {
+        ...state,
+        newJournal:{
+          ...state.newJournal,
+          entry: action.entry
         }
       };
     }

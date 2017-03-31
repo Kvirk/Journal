@@ -31,7 +31,8 @@ app.get('/journals/:id', (req, res) => {
 
 app.post('/journals', (req, res) => {
   if(req.body){
-    req.body.id = ++index;
+    console.log(req.body)
+    req.body.id = index++;
     journals.push(req.body);
     res.json(req.body);
   } else{

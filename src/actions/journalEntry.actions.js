@@ -4,7 +4,8 @@ import axios from 'axios';
 export const addJournal = () => (dispatch, getState) => {
   dispatch({type: 'ASYNC_ADD_JOURNAL'});
   console.log('ADD_JOURNAL', getState());
-  axios.post('/journals', {name: getState().asyncJournals.newJournal.name})
+  axios.post('/journals', {name: getState().asyncJournals.newJournal.name,
+                        entry: getState().asyncJournals.newJournal.entry})
     .then((response) => {
       dispatch({type:'ASYNC_ADD_JOURNAL_SUCCESS', data: response.data});
     }, () => {
@@ -32,3 +33,5 @@ export const fetchJournals = () => (dispatch) => {
 }
 
 export const updateName = (name) => ({type: 'ASYNC_UPDATE_NAME', name});
+
+export const updateEntry = (entry) => ({type: 'ASYNC_UPDATE_ENTRY', entry});
