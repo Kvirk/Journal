@@ -1,5 +1,5 @@
 const initialState = {
-  type: 'make',
+  type: 'home',
   list: [],
   newJournal: {name: '', entry: '', rating: '0'},
   loading: false,

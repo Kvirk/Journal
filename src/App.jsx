@@ -1,5 +1,6 @@
 import React from 'react';
 import JournalEntry from './components/JournalEntry.jsx';
+import JournalList from './components/JournalList.jsx';
 import {connect} from 'react-redux';
 import {fetchJournals} from './actions/journalEntry.actions'
 class App extends React.Component{
@@ -10,6 +11,7 @@ class App extends React.Component{
     return <div>
       <h2>Journals</h2>
       <JournalEntry/>
+      <JournalList/>
     </div>;
   }
 }

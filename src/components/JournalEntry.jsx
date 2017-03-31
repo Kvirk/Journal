@@ -5,21 +5,9 @@ import {addJournal, completeJournal, updateName, updateEntry, updateRating} from
 // Takes in the current store, returns a props
 
 const Journal = ({type, journals, newJournal, loading, onAddJournal, onCompleteJournal, onUpdateName, onUpdateEntry, onUpdateRating}) => {
-  const journalItems = journals.map((journal) => {
-    const completeSection = (journal.completed)?
-      <span style={{color: 'green'}}>&nbsp;Done!!</span>:
-      <button onClick={() => onCompleteJournal(journal.id)}>Complete</button>
-    return <li key={journal.id}>
-      {journal.name}
-      {journal.entry}
-      {journal.rating}
-      {completeSection}
-    </li>
-  });
   const listSection = (loading)?
     (<p><i className="fa fa-spinner fa-spin"></i></p>):
     (<div>
-      { type === 'nothing' ? <ul>{journalItems}</ul> : null }
       <form onSubmit={(e) => {e.preventDefault(); onAddJournal();}}>
         <label htmlFor='name'>Name</label>
         <input type='text' name='name' value={newJournal.name}
@@ -35,17 +23,12 @@ const Journal = ({type, journals, newJournal, loading, onAddJournal, onCompleteJ
       </form>
     </div>);
   return <div>
-      {listSection}
+      {type === 'home' ? <ul>{listSection}</ul> : null }
     </div>;
 };
 
 Journal.propTypes = {
   type: React.PropTypes.string,
-  journals: React.PropTypes.arrayOf(React.PropTypes.shape({
-    name: React.PropTypes.string,
-    completed: React.PropTypes.bool,
-    id: React.PropTypes.number
-  })),
   newJournal: React.PropTypes.shape({
     name: React.PropTypes.string,
     entry: React.PropTypes.string,
@@ -61,7 +44,6 @@ Journal.propTypes = {
 
 const mapStateToProps = ({asyncJournals}) => ({
   type: asyncJournals.type,
-  journals: asyncJournals.list || [],
   newJournal: asyncJournals.newJournal,
   loading:asyncJournals.loading
 });
