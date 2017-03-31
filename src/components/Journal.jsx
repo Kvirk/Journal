@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Journal = ({journals, newJournal, loading, onAddJournal, onCompleteJournal, onUpdateName, onUpdateEntry}) => {
+const Journal = ({journals, newJournal, loading, onAddJournal, onCompleteJournal, onUpdateName, onUpdateEntry, onUpdateRating}) => {
   const journalItems = journals.map((journal) => {
     const completeSection = (journal.completed)?
       <span style={{color: 'green'}}>&nbsp;Done!!</span>:
@@ -8,6 +8,7 @@ const Journal = ({journals, newJournal, loading, onAddJournal, onCompleteJournal
     return <li key={journal.id}>
       {journal.name}
       {journal.entry}
+      {journal.rating}
       {completeSection}
     </li>
   });
@@ -21,6 +22,11 @@ const Journal = ({journals, newJournal, loading, onAddJournal, onCompleteJournal
           onChange={(e) => onUpdateName(e.target.value)}/>
         <input type='text' name='entry' value={newJournal.entry}
           onChange={(e) => onUpdateEntry(e.target.value)}/>
+        <select  name='rating' value={newJournal.rating} onChange={(e) => onUpdateRating(e.target.value)} className="form-control" id="sel1">
+          {Array.from(new Array(21), (x,i) => i - 10).map((element) => {
+            return <option>{element}</option>
+          })}
+        </select>
         <button type='submit'>Create</button>
       </form>
     </div>);
@@ -37,13 +43,15 @@ Journal.propTypes = {
   })),
   newJournal: React.PropTypes.shape({
     name: React.PropTypes.string,
-    entry: React.PropTypes.string
+    entry: React.PropTypes.string,
+    rating: React.PropTypes.string
   }),
   loading: React.PropTypes.bool,
   onCompleteJournal: React.PropTypes.func,
   onAddJournal: React.PropTypes.func,
   onUpdateName: React.PropTypes.func,
-  onUpdateEntry: React.PropTypes.func
+  onUpdateEntry: React.PropTypes.func,
+  onUpdateRating: React.PropTypes.func
 };
 
 export default Journal;
