@@ -9,26 +9,46 @@ const asyncJournalReducer = (state = initialState, action) => {
   switch(action.type){
     case 'ASYNC_FETCH_JOURNALS':{
       return {
-        ...state, loading: true
+        ...state,
+        loading: true
       };
     }
+
     case 'ASYNC_FETCH_JOURNALS_SUCCESS':{
       return {
-        ...state, list: action.list, loading: false, message: undefined
+        ...state,
+        list: action.list,
+        loading: false,
+        message: undefined
       };
     }
+
     case 'ASYNC_ADD_JOURNAL':{
-      return {...state, loading: true, message: undefined};
+      return {...state,
+        loading: true,
+        message: undefined};
     }
+
     case 'ASYNC_ADD_JOURNAL_SUCCESS':{
       return {
         type: 'nothing',
-        list: state.list.concat(action.data),
+        list: action.list,
         loading: false,
         message: undefined,
         newJournal: {name: '', entry: '', rating: '0'}
       };
     }
+
+    case 'ASYNC_SEE_JOURNALS':{
+      return {...state,
+        type: 'nothing'}
+    }
+
+    case 'BACK_TO_MAIN':{
+      return {...state,
+        type: 'home'}
+    }
+
     case 'ASYNC_DELETE_JOURNAL':{
       return {...state, loading:true};
     }
@@ -39,25 +59,14 @@ const asyncJournalReducer = (state = initialState, action) => {
         message: undefined
       };
     }
-    case 'ASYNC_COMPLETE_JOURNAL':{
-      return {...state, loading:true};
-    }
-    case 'ASYNC_COMPLETE_JOURNAL_SUCCESS':{
-      return {
-        ...state,
-        list: state.list.map((journal) => (journal.id === action.id)?
-          {...journal, completed: true}:
-          journal),
-        loading: false,
-        message: undefined
-      };
-    }
+
     case 'ASYNC_DELETE_JOURNAL_FAILURE':
     case 'ASYNC_FETCH_JOURNALS_FAILURE':
     case 'ASYNC_ADD_JOURNAL_FAILURE':
     case 'ASYNC_COMPLETE_JOURNAL_FAILURE':{
       return {...state, loading: false, message: 'There was a fetch error'};
     }
+
     case 'ASYNC_UPDATE_NAME':{
       return {
         ...state,
@@ -67,6 +76,7 @@ const asyncJournalReducer = (state = initialState, action) => {
         }
       };
     }
+
     case 'ASYNC_UPDATE_ENTRY':{
       return {
         ...state,
@@ -76,6 +86,7 @@ const asyncJournalReducer = (state = initialState, action) => {
         }
       };
     }
+
     case 'ASYNC_UPDATE_RATING':{
       return {
         ...state,
@@ -85,6 +96,7 @@ const asyncJournalReducer = (state = initialState, action) => {
         }
       };
     }
+
     default: return state;
   }
 }

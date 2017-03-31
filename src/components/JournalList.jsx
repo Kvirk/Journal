@@ -1,22 +1,24 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {addJournal, completeJournal, updateName, updateEntry, updateRating} from '../actions/journalEntry.actions';
+import {backToMain} from '../actions/journalList.actions';
 
 
-const JournalList = ({type, journals}) => {
+const JournalList = ({type, journals, onBackToMain}) => {
   const journalItems = journals.map((journal) => {
-    const completeSection = (journal.completed)?
-      <span style={{color: 'green'}}>&nbsp;Done!!</span>:
-      <button onClick={() => onCompleteJournal(journal.id)}>Complete</button>
-    return <li key={journal.id}>
-      {journal.name}
-      {journal.entry}
-      {journal.rating}
-      {completeSection}
-    </li>
+    return <div key={journal.id}>
+      <p>
+        {journal.name}
+      </p>
+      <p>
+        {journal.entry}
+      </p>
+      <p>
+        {journal.rating}
+      </p>
+    </div>
   });
   return <div>
-    { type === 'nothing' ? <ul>{journalItems}</ul> : null }
+    { type === 'nothing' ? <ul>{journalItems}<button onClick={onBackToMain}>Back</button></ul> : null }
     </div>;
 };
 
@@ -28,7 +30,8 @@ JournalList.propTypes = {
     rating: React.PropTypes.number,
     completed: React.PropTypes.bool,
     id: React.PropTypes.number
-  }))
+  })),
+  onBackToMain: React.PropTypes.func
 };
 
 const mapStateToProps = ({asyncJournals}) => ({
@@ -37,5 +40,8 @@ const mapStateToProps = ({asyncJournals}) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  onBackToMain(){
+    dispatch(backToMain());
+  }
 });
 export default connect(mapStateToProps, mapDispatchToProps)(JournalList);

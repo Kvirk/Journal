@@ -1,10 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {addJournal, completeJournal, updateName, updateEntry, updateRating} from '../actions/journalEntry.actions';
+import {addJournal, completeJournal, updateName, updateEntry, updateRating, seeJournals} from '../actions/journalEntry.actions';
 
-// Takes in the current store, returns a props
-
-const Journal = ({type, journals, newJournal, loading, onAddJournal, onCompleteJournal, onUpdateName, onUpdateEntry, onUpdateRating}) => {
+const Journal = ({type, journals, newJournal, loading, onAddJournal, onCompleteJournal, onUpdateName, onUpdateEntry, onUpdateRating, onSeeJournals}) => {
   const listSection = (loading)?
     (<p><i className="fa fa-spinner fa-spin"></i></p>):
     (<div>
@@ -20,6 +18,7 @@ const Journal = ({type, journals, newJournal, loading, onAddJournal, onCompleteJ
           })}
         </select>
         <button type='submit'>Create</button>
+        <button onClick={onSeeJournals}>See Journal Entries</button>
       </form>
     </div>);
   return <div>
@@ -35,11 +34,11 @@ Journal.propTypes = {
     rating: React.PropTypes.string
   }),
   loading: React.PropTypes.bool,
-  onCompleteJournal: React.PropTypes.func,
   onAddJournal: React.PropTypes.func,
   onUpdateName: React.PropTypes.func,
   onUpdateEntry: React.PropTypes.func,
-  onUpdateRating: React.PropTypes.func
+  onUpdateRating: React.PropTypes.func,
+  onSeeJournals: React.PropTypes.func
 };
 
 const mapStateToProps = ({asyncJournals}) => ({
@@ -63,6 +62,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onUpdateRating(rating){
     dispatch(updateRating(rating));
+  },
+  onSeeJournals(rating){
+    dispatch(seeJournals(rating));
   }
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Journal);
