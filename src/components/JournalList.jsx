@@ -5,23 +5,15 @@ import {backToMain} from '../actions/journalList.actions';
 
 const JournalList = ({type, journals, onBackToMain}) => {
   const journalItems = journals.map((journal) => {
-    return <div key={journal.id}>
-      <p>
-        {journal.name}
-      </p>
-      <p>
-        {journal.entry}
-      </p>
-      <p>
-        {journal.rating}
-      </p>
-      <p>
-        {journal.sentiment}
-      </p>
+    return <div key={journal.id} className="jumbotron">
+      <h1 className="display-3">{journal.name}</h1>
+      <p className="lead">{journal.entry}</p>
+      <p>Sentiment: {journal.sentiment}</p>
+      <p>Rating: {journal.rating}</p>
     </div>
   });
   return <div>
-    { type === 'nothing' ? <ul>{journalItems}<button onClick={onBackToMain}>Back</button></ul> : null }
+    { type === 'nothing' ? <div className="container entry"><button className="btn btn-primary" onClick={onBackToMain}>Back</button>{journalItems}</div> : null }
     </div>;
 };
 

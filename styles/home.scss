@@ -1,3 +1,20 @@
-h1 {
-  color: tomato;
+.home {
+  background-color: #d8d8d8;
+  border-radius: 10px;
+  margin-top: 50px;
+  label {
+    margin-top: 5px;
+  }
+}
+
+.entry {
+  margin-top: 50px;
+}
+
+.navbar {
+  color: #d8d8d8
+}
+
+.btn {
+  margin: 10px 10px 10px 0px;
 }

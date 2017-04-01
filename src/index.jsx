@@ -11,6 +11,8 @@ import {Provider} from 'react-redux';
 import App from './App.jsx';
 import reducers from './reducers'
 import thunkMiddleware from 'redux-thunk';
+require ('../styles/application.scss');
+
 const store = createStore(reducers, applyMiddleware(thunkMiddleware));
 
 

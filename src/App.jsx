@@ -9,7 +9,12 @@ class App extends React.Component{
   }
   render(){
     return <div>
-      <h2>Journals</h2>
+
+    <nav className="navbar navbar-toggleable-md bg-faded">
+      <a className="navbar-brand" href="#">
+        Journals
+      </a>
+    </nav>
       <JournalEntry/>
       <JournalList/>
     </div>;

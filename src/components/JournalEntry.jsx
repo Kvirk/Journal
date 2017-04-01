@@ -7,22 +7,30 @@ const Journal = ({type, journals, newJournal, loading, onAddJournal, onCompleteJ
     (<p><i className="fa fa-spinner fa-spin"></i></p>):
     (<div>
       <form onSubmit={(e) => {e.preventDefault(); onAddJournal();}}>
-        <label htmlFor='name'>Name</label>
-        <input type='text' name='name' value={newJournal.name}
+      <div class="form-group">
+        <label htmlFor='name'>Name:</label>
+        <input type='text' className="form-control" name='name' value={newJournal.name}
           onChange={(e) => onUpdateName(e.target.value)}/>
-        <input type='text' name='entry' value={newJournal.entry}
+      </div>
+      <div class="form-group">
+        <label htmlFor='entry'>Entry:</label>
+        <textarea  className="form-control" type='text' name='entry' value={newJournal.entry}
           onChange={(e) => onUpdateEntry(e.target.value)}/>
-        <select  name='rating' value={newJournal.rating} onChange={(e) => onUpdateRating(e.target.value)} className="form-control" id="sel1">
+      </div>
+      <div className="form-group">
+        <label htmlFor='Rating'>Rating:</label>
+        <select className="form-control" name='rating' value={newJournal.rating} onChange={(e) => onUpdateRating(e.target.value)} className="form-control" id="sel1">
           {Array.from(new Array(21), (x,i) => i - 10).map((element) => {
             return <option>{element}</option>
           })}
         </select>
-        <button type='submit'>Create</button>
-        <button onClick={onSeeJournals}>See Journal Entries</button>
+      </div>
+        <button className="btn btn-primary" type='submit'>Create</button>
+        <button className="btn btn-primary" onClick={onSeeJournals}>See Journal Entries</button>
       </form>
     </div>);
   return <div>
-      {type === 'home' ? <ul>{listSection}</ul> : null }
+      {type === 'home' ? <div className="container home">{listSection}</div> : null }
     </div>;
 };
 
