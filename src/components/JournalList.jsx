@@ -15,6 +15,9 @@ const JournalList = ({type, journals, onBackToMain}) => {
       <p>
         {journal.rating}
       </p>
+      <p>
+        {journal.sentiment}
+      </p>
     </div>
   });
   return <div>
