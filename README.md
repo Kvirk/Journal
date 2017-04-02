@@ -14,7 +14,11 @@
 Where ${x} is the id of the post you want to see
 
 ### .env
-MONGODB_URI=..
+MONGODB_URI=...
+PORT=...
 
 ex:
+PORT=3000
 MONGODB_URI=mongodb://localhost:27017/journal
+
+Default webport is 3000 and default MONGODB_URL is 'mongodb://localhost:27017/journal' if not given
