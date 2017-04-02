@@ -2,19 +2,25 @@ import axios from 'axios';
 
 
 export const addJournal = () => (dispatch, getState) => {
-  dispatch({type: 'ASYNC_ADD_JOURNAL'});
-  console.log('ADD_JOURNAL', getState());
-  axios.post('/journals', {name: getState().asyncJournals.newJournal.name,
-                        entry: getState().asyncJournals.newJournal.entry,
-                        rating: Number(getState().asyncJournals.newJournal.rating)})
-    .then((response) => {
-      axios.get('/journals')
-      .then((response2) => {
-        dispatch({type: 'ASYNC_ADD_JOURNAL_SUCCESS', list: response2.data});
-      })
-    }, () => {
-      dispatch({type: 'ASYNC_ADD_JOURNAL_FAILURE'});
-    });
+  let name = getState().asyncJournals.newJournal.name;
+  let entry = getState().asyncJournals.newJournal.entry;
+
+  if(!name || !entry) {
+    dispatch({type: 'NAME_ENTRY_MANDATORY'});
+  } else {
+    dispatch({type: 'ASYNC_ADD_JOURNAL'});
+    axios.post('/journals', {name: name,
+                          entry: entry,
+                          rating: Number(getState().asyncJournals.newJournal.rating)})
+      .then((response) => {
+        axios.get('/journals')
+        .then((response2) => {
+          dispatch({type: 'ASYNC_ADD_JOURNAL_SUCCESS', list: response2.data});
+        })
+      }, () => {
+        dispatch({type: 'ASYNC_ADD_JOURNAL_FAILURE'});
+      });
+  }
 };
 
 export const fetchJournals = () => (dispatch) => {

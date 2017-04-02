@@ -2,17 +2,22 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {addJournal, completeJournal, updateName, updateEntry, updateRating, seeJournals} from '../actions/journalEntry.actions';
 
-const Journal = ({type, journals, newJournal, loading, onAddJournal, onCompleteJournal, onUpdateName, onUpdateEntry, onUpdateRating, onSeeJournals}) => {
+const Journal = ({type, journals, newJournal, loading, onAddJournal, onCompleteJournal, onUpdateName, onUpdateEntry, onUpdateRating, onSeeJournals, message}) => {
+  let alert = (message ? <div className="alert alert-danger">
+      <strong></strong> {message}
+      </div> :
+      null )
   const listSection = (loading)?
     (<p><i className="fa fa-spinner fa-spin"></i></p>):
     (<div>
+      {alert}
       <form onSubmit={(e) => {e.preventDefault(); onAddJournal();}}>
-      <div class="form-group">
+      <div className="form-group">
         <label htmlFor='name'>Name:</label>
         <input type='text' className="form-control" name='name' value={newJournal.name}
           onChange={(e) => onUpdateName(e.target.value)}/>
       </div>
-      <div class="form-group">
+      <div className="form-group">
         <label htmlFor='entry'>Entry:</label>
         <textarea  className="form-control" type='text' name='entry' value={newJournal.entry}
           onChange={(e) => onUpdateEntry(e.target.value)}/>
@@ -20,8 +25,8 @@ const Journal = ({type, journals, newJournal, loading, onAddJournal, onCompleteJ
       <div className="form-group">
         <label htmlFor='Rating'>Rating:</label>
         <select className="form-control" name='rating' value={newJournal.rating} onChange={(e) => onUpdateRating(e.target.value)} className="form-control" id="sel1">
-          {Array.from(new Array(21), (x,i) => i - 10).map((element) => {
-            return <option>{element}</option>
+          {Array.from(new Array(21), (x,i) => i - 10).map((element, index) => {
+            return <option key={index}>{element}</option>
           })}
         </select>
       </div>
@@ -46,13 +51,15 @@ Journal.propTypes = {
   onUpdateName: React.PropTypes.func,
   onUpdateEntry: React.PropTypes.func,
   onUpdateRating: React.PropTypes.func,
-  onSeeJournals: React.PropTypes.func
+  onSeeJournals: React.PropTypes.func,
+  message: React.PropTypes.string
 };
 
 const mapStateToProps = ({asyncJournals}) => ({
   type: asyncJournals.type,
   newJournal: asyncJournals.newJournal,
-  loading:asyncJournals.loading
+  loading: asyncJournals.loading,
+  message: asyncJournals.message
 });
 
 const mapDispatchToProps = (dispatch) => ({

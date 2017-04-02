@@ -29,6 +29,11 @@ const asyncJournalReducer = (state = initialState, action) => {
         message: undefined};
     }
 
+    case 'NAME_ENTRY_MANDATORY':{
+      return {...state,
+        message: 'Name and Entry Mandatory'};
+    }
+
     case 'ASYNC_ADD_JOURNAL_SUCCESS':{
       return {
         type: 'nothing',
@@ -46,7 +51,9 @@ const asyncJournalReducer = (state = initialState, action) => {
 
     case 'BACK_TO_MAIN':{
       return {...state,
-        type: 'home'}
+        type: 'home',
+        message: undefined
+      }
     }
 
     case 'ASYNC_DELETE_JOURNAL':{
