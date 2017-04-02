@@ -11,7 +11,7 @@
 
 * `curl -i -H "Accept: applicatint-Type: application/json" -X GET http://localhost:3000/journals/${x}`
 
-Where ${x} is the id of the post you want to see
+Where ${x} is the id of the post you want to see. Ids start from 1 and increment for every post by 1.
 
 ### .env
 `MONGODB_URI=...`
