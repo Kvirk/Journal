@@ -2,13 +2,16 @@ const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const config = require('./webpack.config');
 const compiler = webpack(config);
+require('dotenv').config()
 
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 
 const MongoClient = require("mongodb").MongoClient;
-const MONGODB_URI = "mongodb://localhost:27017/journal";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost:27017/journal";
+
+const PORT = process.env.PORT || 3000;
 
 app.use(bodyParser.json());
 
@@ -72,6 +75,6 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
       res.sendStatus(400);
     }
   })
-  app.listen(3000);
+  app.listen(PORT);
 
 });

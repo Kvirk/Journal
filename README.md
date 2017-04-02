@@ -12,3 +12,9 @@
 * `curl -i -H "Accept: applicatint-Type: application/json" -X GET http://localhost:3000/journals/${x}`
 
 Where ${x} is the id of the post you want to see
+
+### .env
+MONGODB_URI=..
+
+ex:
+MONGODB_URI=mongodb://localhost:27017/journal
