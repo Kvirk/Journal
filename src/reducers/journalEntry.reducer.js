@@ -34,6 +34,11 @@ const asyncJournalReducer = (state = initialState, action) => {
         message: 'Name and Entry Mandatory'};
     }
 
+    case 'NAME_MANDATORY':{
+      return {...state,
+        message: 'We need your name to see your entries!'};
+    }
+
     case 'ASYNC_ADD_JOURNAL_SUCCESS':{
       return {
         type: 'nothing',

@@ -4,9 +4,6 @@ import JournalList from './components/JournalList.jsx';
 import {connect} from 'react-redux';
 import {fetchJournals} from './actions/journalEntry.actions'
 class App extends React.Component{
-  componentDidMount(){
-    this.props.onFetchJournals();
-  }
   render(){
     return <div>
 
@@ -24,9 +21,5 @@ App.propTypes = {
   onFetchJournals: React.PropTypes.func
 };
 const mapStateToProps = () => ({});
-const mapDispatchToProps = (dispatch) => ({
-  onFetchJournals(){
-    dispatch(fetchJournals());
-  }
-})
+const mapDispatchToProps = () => ({})
 export default connect(mapStateToProps, mapDispatchToProps)(App);

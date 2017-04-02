@@ -31,8 +31,8 @@ const Journal = ({type, journals, newJournal, loading, onAddJournal, onCompleteJ
         </select>
       </div>
         <button className="btn btn-primary" type='submit'>Create</button>
-        <button className="btn btn-primary" onClick={onSeeJournals}>See Journal Entries</button>
       </form>
+      <button className="btn btn-primary" onClick={onSeeJournals}>See Journal Entries</button>
     </div>);
   return <div>
       {type === 'home' ? <div className="container home">{listSection}</div> : null }
@@ -78,8 +78,8 @@ const mapDispatchToProps = (dispatch) => ({
   onUpdateRating(rating){
     dispatch(updateRating(rating));
   },
-  onSeeJournals(rating){
-    dispatch(seeJournals(rating));
+  onSeeJournals(){
+    dispatch(seeJournals());
   }
 });
 export default connect(mapStateToProps, mapDispatchToProps)(Journal);

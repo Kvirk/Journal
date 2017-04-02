@@ -39,18 +39,10 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
     publicPath: '/build'
   }));
 
-  app.get('/journals', (req, res) =>{
-    db.collection("entrys").find().sort({sentiment: -1}).toArray((err, entrys) => {
-      if (err) {
-        return console.log(err);
-      }
-      console.log(entrys);
-      res.json(entrys);
-    });
-  });
-
-  app.get('/journals/:id', (req, res) => {
-    db.collection("entrys").findOne({id: Number(req.params.id)}, (err, entry) => {
+  app.get('/journals/:name', (req, res) => {
+    let nameReg = req.params.name;
+    let nameMatch = new RegExp(nameReg, "i");
+    db.collection("entrys").find({name: nameMatch}).sort({sentiment: -1}).toArray((err, entry) => {
       if (err) {
         res.sendStatus(404);
         return console.log(err);

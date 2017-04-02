@@ -13,7 +13,7 @@ export const addJournal = () => (dispatch, getState) => {
                           entry: entry,
                           rating: Number(getState().asyncJournals.newJournal.rating)})
       .then((response) => {
-        axios.get('/journals')
+        axios.get(`/journals/${name}`)
         .then((response2) => {
           dispatch({type: 'ASYNC_ADD_JOURNAL_SUCCESS', list: response2.data});
         })
@@ -33,8 +33,20 @@ export const fetchJournals = () => (dispatch) => {
     });
 }
 
-export const seeJournals = () => (dispatch) => {
-  dispatch({type: 'ASYNC_SEE_JOURNALS'});
+export const seeJournals = () => (dispatch, getState) => {
+  let name = getState().asyncJournals.newJournal.name;
+  if(!name) {
+    dispatch({type: 'NAME_MANDATORY'});
+  } else {
+    dispatch({type: 'ASYNC_FETCH_JOURNALS'});
+    axios.get(`/journals/${name}`)
+      .then((response) => {
+        dispatch({type: 'ASYNC_FETCH_JOURNALS_SUCCESS', list: response.data});
+        dispatch({type: 'ASYNC_SEE_JOURNALS'});
+      }, () => {
+        dispatch({type: 'ASYNC_FETCH_JOURNALS_FAILURE'});
+      });
+  }
 }
 
 export const updateName = (name) => ({type: 'ASYNC_UPDATE_NAME', name});
