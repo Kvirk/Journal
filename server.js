@@ -60,7 +60,7 @@ MongoClient.connect(MONGODB_URI, (err, db) => {
     if(req.body){
       let entry = req.body;
       entry.id = index++;
-      entry.sentiment = entry.entry.split(/\s+/g).length * Number(entry.rating);
+      entry.sentiment = entry.entry.trim().split(/\s+/g).length * Number(entry.rating);
       db.collection("entrys").insertOne(entry, (err, entrys) => {
         if (err) {
           console.log(err);
