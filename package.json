@@ -30,7 +30,7 @@
   },
   "devDependencies": {
     "eslint": "2.7.0",
-    "eslint-plugin-react": "5.2.2",
+    "eslint-plugin-react": "5.2.2"
   },
   "dependencies": {
     "axios": "^0.15.3",
